@@ -32,6 +32,9 @@ No utiliza servicios externos ni envia la consulta a Google.
 ## 3. Activar correo automatico (pendiente)
 
 No se puede activar ni comprobar sin hosting y proveedor de correo.
+La preparacion de Cloudflare Turnstile esta documentada en
+[TURNSTILE.md](TURNSTILE.md). Es un plan de integracion; el CAPTCHA real aun no
+esta activado. No publicar esta documentacion como parte del sitio.
 
 1. Identificar si el servidor permite PHP, Node.js o funciones de servidor.
 2. Elegir un proveedor SMTP o de correo transaccional y verificar el dominio.

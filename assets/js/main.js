@@ -138,6 +138,25 @@ function initializeQuoteForm(quoteForm, contact = false) {
   const whatsappLink = document.querySelector("#quote-whatsapp");
   const emailLink = document.querySelector("#quote-email");
   const preview = document.querySelector("#quote-preview");
+  let question = Math.floor(Math.random() * 81);
+  try {
+    const storageKey = `math-question:${quoteForm.id}`;
+    const previous = sessionStorage.getItem(storageKey);
+    if (previous !== null && question === Number(previous)) {
+      question = (question + 1 + Math.floor(Math.random() * 80)) % 81;
+    }
+    sessionStorage.setItem(storageKey, String(question));
+  } catch (error) {
+    console.warn("No se pudo recordar la pregunta matemática; la suma aleatoria puede repetirse al recargar.", error);
+  }
+  const firstNumber = Math.floor(question / 9) + 1;
+  const secondNumber = question % 9 + 1;
+  const mathAnswer = quoteForm.elements["math-answer"];
+  const expectedAnswer = firstNumber + secondNumber;
+  quoteForm.querySelector('label[for="math-answer"]').textContent = `Pregunta matemática * — ${firstNumber} + ${secondNumber} =`;
+  const equation = quoteForm.querySelector(".math-equation");
+  if (equation) equation.textContent = `${firstNumber} + ${secondNumber} = ?`;
+  mathAnswer.value = "";
   if (completion) completion.max = requiredFields.length;
 
   function clearDelivery() {
@@ -183,7 +202,7 @@ function initializeQuoteForm(quoteForm, contact = false) {
     } else if (email !== emailConfirm) {
       formStatus.textContent = "Los correos electrónicos no coinciden. Verifique ambos campos.";
       invalidField = quoteForm.elements["email-confirm"];
-    } else if (Number(quoteForm.elements["math-answer"].value) !== (contact ? 11 : 7)) {
+    } else if (Number(mathAnswer.value) !== expectedAnswer) {
       formStatus.textContent = "La respuesta de la pregunta matemática no es correcta. Inténtelo de nuevo.";
       invalidField = quoteForm.elements["math-answer"];
     }

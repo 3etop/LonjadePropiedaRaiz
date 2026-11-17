@@ -127,12 +127,15 @@ p { overflow-wrap: anywhere; }
 .appraisals-intro .eyebrow { color: #edcc91; }
 .appraisals-intro p:not(.eyebrow) { color: #d7e2eb; font-size: 14px; }
 .appraisal-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.appraisal-card { min-width: 0; overflow: hidden; background: white; border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); }
-.appraisal-card img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--blue-soft); }
+.appraisal-card { position: relative; min-width: 0; overflow: hidden; background: white; border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); }
+.appraisal-card img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: var(--blue-soft); }
 .appraisal-card-content { display: flex; flex-direction: column; align-items: flex-start; min-height: 190px; padding: 18px; }
 .appraisal-card h3, .appraised-assets h3, .appraisal-applications h3 { margin: 0 0 10px; color: var(--navy-deep); font-size: 18px; }
 .appraisal-card p { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
 .appraisal-card a { margin-top: auto; color: var(--blue); font-size: 13px; font-weight: 700; text-decoration: none; }
+.appraisal-card a::after { content: ""; position: absolute; inset: 0; }
+.appraisal-card:focus-within { outline: 3px solid #2874b9; outline-offset: 4px; }
+.appraisal-card:hover { border-color: var(--blue); }
 .appraisal-card a:hover { text-decoration: underline; }
 .appraised-assets { display: grid; grid-template-columns: minmax(220px, .7fr) 1.3fr; gap: 32px; align-items: start; padding: clamp(24px, 4vw, 40px); background: var(--blue-soft); border: 1px solid #d5e5f1; border-radius: 16px; }
 .appraised-assets > div > p:not(.eyebrow) { color: var(--muted); font-size: 14px; }
