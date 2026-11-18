@@ -32,7 +32,7 @@ real es `3etop.github.io`. Las rutas y subcarpetas no son hostnames.
 Puntos existentes:
 
 - Cotizacion: `index.html`, formulario `quote-form`.
-- Contacto: `contactenos.html`, formulario `contact-form`.
+- Contacto: `nosotros/contactenos.html`, formulario `contact-form`.
 - Logica compartida: `initializeQuoteForm` en `assets/js/main.js`.
 
 Cuando el backend este disponible:

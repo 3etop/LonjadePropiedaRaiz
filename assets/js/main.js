@@ -58,13 +58,14 @@ const searchPages = [
   ["Documentos y datos", "index.html#documentos", "Requisitos escritura planos certificado CHIP inventario"],
   ["Preguntas frecuentes", "index.html#preguntas", "Precio costo plazos ciudades cobertura documentos"],
   ["Cotizar un avalúo", "index.html#cotizar", "Formulario solicitud WhatsApp correo"],
-  ["Formación en avalúos", "index.html#formacion", "Capacitación consulta cursos"],
+  ["Formación en avalúos", "index.html#formacion", "Próximamente informaremos sobre la formación"],
   ["Asesoría inmobiliaria", "index.html#asesoria-inmobiliaria", "Consultoría inmuebles asesoramiento"],
-  ["Afiliación", "afiliacion.html", "Miembros código ética actualización"],
-  ["Contáctenos", "contactenos.html", "Contacto teléfono correo mensaje ubicación"],
-  ["Aviso de privacidad", "aviso-de-privacidad.html", "Protección tratamiento datos personales derechos política"],
+  ["Afiliación", "nosotros/afiliacion.html", "Miembros código ética actualización"],
+  ["Contáctenos", "nosotros/contactenos.html", "Contacto teléfono correo mensaje ubicación"],
+  ["Aviso de privacidad", "nosotros/aviso-de-privacidad.html", "Protección tratamiento datos personales derechos política"],
   ["Avalúo de inmuebles", "avaluos/avaluo-de-inmuebles.html", "Valor comercial propiedades vivienda"],
   ["Avalúo comercial", "avaluos/avaluo-comercial.html", "Valor mercado bienes"],
+  ["Criterios para los avalúos comerciales", "avaluos/criterios-para-los-avaluos-comerciales.html", "Objetividad certeza fuentes transparencia integridad suficiencia independencia profesionalidad"],
   ["Avalúo corporativo", "avaluos/avaluo-corporativo.html", "Colegiado activos equipo multidisciplinario"],
   ["Avalúo de renta de mercado", "avaluos/avaluo-de-renta-de-mercado.html", "Arrendamiento canon alquiler"],
   ["Avalúo de daños y mejoras", "avaluos/avaluo-de-danos-y-mejoras.html", "Diagnóstico reposición visita"],
@@ -138,25 +139,33 @@ function initializeQuoteForm(quoteForm, contact = false) {
   const whatsappLink = document.querySelector("#quote-whatsapp");
   const emailLink = document.querySelector("#quote-email");
   const preview = document.querySelector("#quote-preview");
-  let question = Math.floor(Math.random() * 81);
-  try {
-    const storageKey = `math-question:${quoteForm.id}`;
-    const previous = sessionStorage.getItem(storageKey);
-    if (previous !== null && question === Number(previous)) {
-      question = (question + 1 + Math.floor(Math.random() * 80)) % 81;
-    }
-    sessionStorage.setItem(storageKey, String(question));
-  } catch (error) {
-    console.warn("No se pudo recordar la pregunta matemática; la suma aleatoria puede repetirse al recargar.", error);
-  }
-  const firstNumber = Math.floor(question / 9) + 1;
-  const secondNumber = question % 9 + 1;
+  let question;
   const mathAnswer = quoteForm.elements["math-answer"];
-  const expectedAnswer = firstNumber + secondNumber;
-  quoteForm.querySelector('label[for="math-answer"]').textContent = `Pregunta matemática * — ${firstNumber} + ${secondNumber} =`;
-  const equation = quoteForm.querySelector(".math-equation");
-  if (equation) equation.textContent = `${firstNumber} + ${secondNumber} = ?`;
-  mathAnswer.value = "";
+  let expectedAnswer;
+  function refreshMathQuestion() {
+    let nextQuestion = Math.floor(Math.random() * 81);
+    try {
+      const storageKey = `math-question:${quoteForm.id}`;
+      const previous = question === undefined ? sessionStorage.getItem(storageKey) : question;
+      if (previous !== null && nextQuestion === Number(previous)) {
+        nextQuestion = (nextQuestion + 1 + Math.floor(Math.random() * 80)) % 81;
+      }
+      sessionStorage.setItem(storageKey, String(nextQuestion));
+    } catch (error) {
+      console.warn("No se pudo recordar la pregunta matemática; la suma aleatoria puede repetirse al recargar.", error);
+    }
+    if (nextQuestion === question) nextQuestion = (nextQuestion + 1) % 81;
+    question = nextQuestion;
+    const firstNumber = Math.floor(question / 9) + 1;
+    const secondNumber = question % 9 + 1;
+    expectedAnswer = firstNumber + secondNumber;
+    quoteForm.querySelector('label[for="math-answer"]').textContent = `Pregunta matemática ${firstNumber} + ${secondNumber} =`;
+    const equation = quoteForm.querySelector(".math-equation");
+    if (equation) equation.textContent = `${firstNumber} + ${secondNumber} = ?`;
+    mathAnswer.value = "";
+    mathAnswer.removeAttribute("aria-invalid");
+    }
+  refreshMathQuestion();
   if (completion) completion.max = requiredFields.length;
 
   function clearDelivery() {
@@ -173,6 +182,16 @@ function initializeQuoteForm(quoteForm, contact = false) {
     completion.textContent = `${count} de ${requiredFields.length} campos`;
     completionText.textContent = completion.textContent;
   }
+
+  const mathRefresh = quoteForm.querySelector(".math-refresh");
+  if (mathRefresh) mathRefresh.addEventListener("click", () => {
+    refreshMathQuestion();
+    clearDelivery();
+    formStatus.className = "form-status info";
+    formStatus.textContent = "La suma ha cambiado. Escriba la nueva respuesta.";
+    updateCompletion();
+    mathAnswer.focus();
+  });
 
   quoteForm.addEventListener("input", (event) => {
     if (event.target === preview) return;
@@ -240,7 +259,7 @@ function initializeQuoteForm(quoteForm, contact = false) {
       ...fields.map(([label, name]) => `${label}: ${quoteForm.elements[name].value.trim()}`),
     ].join("\r\n");
     whatsappLink.href = `https://wa.me/573192192684?text=${encodeURIComponent(message)}`;
-    emailLink.href = `mailto:lonja@lonjadepropiedadraiz.com?cc=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    emailLink.href = `mailto:lonjadepropiedad@gmail.com?cc=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
     preview.value = message;
     delivery.hidden = false;
     formStatus.textContent = "Solicitud preparada, aún no enviada. Use las dos opciones siguientes para enviarla por WhatsApp y por correo con copia a su email.";
@@ -263,6 +282,37 @@ const quoteForm = document.querySelector("#quote-form");
 if (quoteForm) initializeQuoteForm(quoteForm);
 const contactForm = document.querySelector("#contact-form");
 if (contactForm) initializeQuoteForm(contactForm, true);
+
+const videoModal = document.querySelector("#video-modal");
+if (videoModal && typeof videoModal.showModal === "function") {
+  const player = videoModal.querySelector(".video-player");
+  const videoTitle = videoModal.querySelector("#video-modal-title");
+  const externalLink = videoModal.querySelector(".video-external");
+  document.querySelectorAll("[data-video-id]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      event.preventDefault();
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube-nocookie.com/embed/${link.dataset.videoId}`;
+      iframe.title = link.getAttribute("aria-label");
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      videoTitle.textContent = "Video sobre avalúo catastral";
+      externalLink.href = link.href;
+      player.replaceChildren(iframe);
+      videoModal.showModal();
+    });
+  });
+  videoModal.querySelector("[data-video-close]").addEventListener("click", () => videoModal.close());
+  videoModal.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      videoModal.close();
+    }
+  });
+  videoModal.addEventListener("close", () => player.replaceChildren());
+}
 
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 if ("IntersectionObserver" in window && !motionPreference.matches) {

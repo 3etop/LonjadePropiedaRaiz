@@ -11,6 +11,25 @@ El buscador local esta en `assets/js/main.js`, en `searchPages`. Al crear una pa
 o seccion, agregue su titulo, ruta desde la raiz y terminos relacionados.
 No utiliza servicios externos ni envia la consulta a Google.
 
+## Organizacion de carpetas
+
+- `index.html`: pagina principal en la raiz.
+- `nosotros/`: paginas institucionales `afiliacion.html`, `contactenos.html` y
+  `aviso-de-privacidad.html`. Sus URLs ahora incluyen el prefijo `nosotros/`.
+- `avaluos/`: paginas de servicios y criterios de avaluos comerciales.
+- `assets/css/` y `assets/js/`: estilos y logica compartidos.
+- `assets/imagenes/`: logotipos e imagenes generales.
+- `assets/imagenes/avaluos/`: imagenes de los servicios, incluidos originales
+  antiguos conservados.
+- `assets/documentos/`: politica de tratamiento de datos en PDF.
+- `docs/`: guias de publicacion e integraciones pendientes.
+- `referencias/`: material de consulta; no forma parte de la navegacion publica.
+
+Las rutas de esta lista parten de la raiz del proyecto. Para revisar el sitio,
+abra esa raiz con Live Server. YouTube requiere un sitio servido por HTTP o HTTPS;
+abrir los HTML directamente como archivos puede impedir la reproduccion.
+No mueva recursos sin actualizar sus enlaces relativos en todas las paginas.
+
 ## 1. Confirmar informacion
 
 - Validar con la Lonja los pasos del servicio, documentos, cobertura, honorarios y
@@ -21,8 +40,10 @@ No utiliza servicios externos ni envia la consulta a Google.
 ## 2. Publicar cuando tenga acceso
 
 - Confirmar dominio, subcarpeta y tecnologia del hosting antes de configurar URLs.
-- Subir `index.html`, las otras paginas HTML, `avaluos/` y `assets/`.
-- No publicar `referencias/`, esta guia ni archivos privados de configuracion.
+- Subir `index.html`, `nosotros/`, `avaluos/` y `assets/`.
+- No incluir `referencias/`, `docs/` ni archivos privados de configuracion en el
+  paquete publico. Si Pages sirve directamente la rama, los archivos versionados
+  de esas carpetas tambien pueden ser accesibles; no guardar secretos en ellas.
 - Activar HTTPS y elegir una direccion principal (con o sin www).
 - Si sustituye un sitio existente, guardar copia y configurar redirecciones 301
   desde sus rutas anteriores hacia las equivalentes nuevas. No eliminar rutas
