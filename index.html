@@ -385,7 +385,7 @@
           <label for="completion">Formulario completado <span id="completion-text">0 de 12 campos</span></label>
           <progress id="completion" max="12" value="0">0 de 12 campos</progress>
         </div>
-        <p class="demo-notice"><strong>Envío manual:</strong> al completar el formulario podrá abrir WhatsApp al 319 219 26 84 y preparar un correo a lonjadepropiedad@gmail.com con copia a su correo. Debe confirmar cada envío en su aplicación; el sitio no envía mensajes automáticamente.</p>
+        <p class="demo-notice"><strong>Envío manual:</strong> al pulsar el botón se intentará abrir Gmail en otra pestaña y continuar a WhatsApp al 319 219 26 84 en esta pestaña. El correo se prepara para lonja@lonjadepropiedadraiz.com y lonjadepropiedad@gmail.com, con copia a su dirección. Debe pulsar Enviar en cada servicio; el sitio no envía mensajes automáticamente.</p>
         <span class="required-note">* Indica campo requerido</span>
         <p class="form-intro">Si no sabe algún dato o no es necesario, marque una X en el campo. Para que se haga el envío del formulario debe estar completamente diligenciado. Este formulario no es un contrato formal; llenarlo no le causará ningún compromiso, costo u obligación.</p>
 
@@ -456,18 +456,18 @@
               <p class="help-text" id="math-help">Resuelva este simple problema matemático y escriba la solución; por ejemplo: para 1 + 3, escriba 4.</p>
             </div>
           </div>
-          <button class="form-submit" type="submit">Preparar solicitud para enviar <span aria-hidden="true">→</span></button>
-          <p class="help-text">Sus datos se usarán para preparar los mensajes. Solo se compartirán con las aplicaciones de WhatsApp y correo cuando abra cada opción.</p>
+          <button class="form-submit" type="submit">Continuar a WhatsApp y Gmail <span aria-hidden="true">→</span></button>
+          <p class="help-text">Al continuar, sus datos se compartirán con WhatsApp y Gmail para preparar los mensajes. Necesita iniciar sesión en Gmail.</p>
           <p class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
           <div class="quote-delivery" id="quote-delivery" hidden>
             <div class="quote-delivery-actions">
-              <a class="button button-primary" id="quote-whatsapp" target="_blank" rel="noopener noreferrer">Abrir WhatsApp (nueva pestaña)</a>
-              <a class="button button-primary" id="quote-email">Abrir correo con copia a mi email</a>
+              <a id="quote-whatsapp" target="_blank" rel="noopener noreferrer" hidden>Abrir WhatsApp (nueva pestaña)</a>
+              <a id="quote-gmail" target="_blank" rel="noopener noreferrer" hidden>Abrir Gmail (nueva pestaña)</a>
             </div>
-            <p>Para entregar la solicitud por ambos medios, abra cada opción y pulse Enviar en WhatsApp y en su aplicación de correo. La copia llegará al correo diligenciado cuando envíe el email.</p>
+            <p>Si alguna pestaña no se abrió, use los enlaces anteriores. Revise y envíe cada mensaje en WhatsApp y Gmail. La copia llegará al correo diligenciado cuando envíe el email.</p>
             <label for="quote-preview">Mensaje completo para copiar</label>
             <textarea id="quote-preview" rows="12" readonly></textarea>
-            <p>Si no se abre alguna aplicación o el mensaje aparece incompleto, copie este texto. Envíelo por WhatsApp al <strong>319 219 26 84</strong> y por correo a <strong>lonjadepropiedad@gmail.com</strong>, agregando su correo en CC. Necesita una aplicación de correo configurada para abrir el enlace de email.</p>
+            <p>Si no se abre alguna ventana o el mensaje aparece incompleto, copie este texto. Envíelo por WhatsApp al <strong>319 219 26 84</strong> y por correo a <strong>lonja@lonjadepropiedadraiz.com</strong> y <strong>lonjadepropiedad@gmail.com</strong>, agregando su correo en CC.</p>
           </div>
         </form>
       </section>
@@ -529,7 +529,7 @@
         <details><summary>¿Cuánto tarda y en qué ciudades atienden?</summary><p>Confirme con la Lonja la cobertura para la ubicación de su bien y el plazo estimado según el servicio. Este sitio no publica tiempos de entrega ni cobertura territorial sin confirmar.</p></details>
         <details><summary>¿El informe sirve para cualquier trámite?</summary><p>No necesariamente. Informe si lo necesita para una negociación, crédito, proceso judicial, seguros u otro fin, y consulte los requisitos con la entidad que recibirá el informe antes de contratar.</p></details>
         <details><summary>¿Qué documentos debo presentar?</summary><p>Depende del bien y del propósito del avalúo. Consulte la <a href="#documentos">orientación sobre documentos y datos</a> y confirme con un asesor la lista correspondiente a su caso.</p></details>
-        <details><summary>¿El formulario envía automáticamente mi solicitud?</summary><p>No. Prepare el mensaje y después abra las opciones de WhatsApp y correo. Debe pulsar Enviar en cada aplicación. El correo se prepara con copia a su dirección; preparar el formulario no confirma su entrega.</p></details>
+        <details><summary>¿El formulario envía automáticamente mi solicitud?</summary><p>No. Al continuar se intentan abrir WhatsApp y Gmail con el mensaje preparado. Debe pulsar Enviar en cada servicio. El correo se prepara con copia a su dirección; preparar el formulario no confirma su entrega.</p></details>
         <details><summary>¿La visita de diagnóstico tiene costo?</summary><p>En el avalúo de daños y mejoras puede haber costos de diagnóstico previos al avalúo. Consulte y acepte las condiciones de cualquier visita antes de programarla.</p></details>
         <details><summary>¿Cómo puedo recibir atención presencial?</summary><p>La atención es únicamente con cita previa. Llame al <a href="tel:+573192192684">319 219 26 84</a> de lunes a viernes, de 8:00 a. m. a 12:00 m. y de 2:00 p. m. a 5:00 p. m.</p></details>
       </div>

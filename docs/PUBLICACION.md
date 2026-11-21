@@ -3,9 +3,11 @@
 ## Estado actual
 
 El sitio funciona como archivos estaticos y no requiere instalacion de paquetes.
-Abra `index.html` para revisarlo. Los formularios preparan mensajes para WhatsApp
-y correo; el visitante debe confirmar cada envio en su aplicacion. No existe
-backend ni confirmacion de entrega. No se han integrado testimonios ni credenciales.
+Abra `index.html` para revisarlo. Al continuar en los formularios se intenta abrir
+Gmail en otra pestana y WhatsApp en la pestana actual con mensajes preparados; el
+visitante debe confirmar cada envio. Si se bloquea Gmail, el formulario permanece
+abierto y muestra enlaces de respaldo. No existe backend ni confirmacion de
+entrega. No se han integrado testimonios ni credenciales.
 
 El buscador local esta en `assets/js/main.js`, en `searchPages`. Al crear una pagina
 o seccion, agregue su titulo, ruta desde la raiz y terminos relacionados.

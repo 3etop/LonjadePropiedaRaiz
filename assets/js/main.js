@@ -137,7 +137,7 @@ function initializeQuoteForm(quoteForm, contact = false) {
   const completionText = document.querySelector("#completion-text");
   const delivery = document.querySelector("#quote-delivery");
   const whatsappLink = document.querySelector("#quote-whatsapp");
-  const emailLink = document.querySelector("#quote-email");
+  const gmailLink = document.querySelector("#quote-gmail");
   const preview = document.querySelector("#quote-preview");
   let question;
   const mathAnswer = quoteForm.elements["math-answer"];
@@ -171,7 +171,9 @@ function initializeQuoteForm(quoteForm, contact = false) {
   function clearDelivery() {
     delivery.hidden = true;
     whatsappLink.removeAttribute("href");
-    emailLink.removeAttribute("href");
+    whatsappLink.hidden = true;
+    gmailLink.removeAttribute("href");
+    gmailLink.hidden = true;
     preview.value = "";
   }
 
@@ -259,12 +261,30 @@ function initializeQuoteForm(quoteForm, contact = false) {
       ...fields.map(([label, name]) => `${label}: ${quoteForm.elements[name].value.trim()}`),
     ].join("\r\n");
     whatsappLink.href = `https://wa.me/573192192684?text=${encodeURIComponent(message)}`;
-    emailLink.href = `mailto:lonjadepropiedad@gmail.com?cc=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    const gmailParams = new URLSearchParams({
+      view: "cm",
+      fs: "1",
+      to: "lonja@lonjadepropiedadraiz.com,lonjadepropiedad@gmail.com",
+      cc: email,
+      su: subject,
+      body: message,
+    });
+    gmailLink.href = `https://mail.google.com/mail/?${gmailParams}`;
+    const gmailWindow = window.open("about:blank", "_blank");
     preview.value = message;
     delivery.hidden = false;
-    formStatus.textContent = "Solicitud preparada, aún no enviada. Use las dos opciones siguientes para enviarla por WhatsApp y por correo con copia a su email.";
+    whatsappLink.hidden = false;
+    gmailLink.hidden = false;
+    formStatus.textContent = gmailWindow
+      ? "Se intentó abrir Gmail en otra pestaña y continuar a WhatsApp. Revise y envíe cada mensaje; aún no se ha enviado."
+      : "El navegador bloqueó la ventana de Gmail. Abra los enlaces siguientes y pulse Enviar en WhatsApp y Gmail; aún no se ha enviado.";
     formStatus.classList.add("info");
     formStatus.focus();
+    if (gmailWindow) {
+      gmailWindow.opener = null;
+      gmailWindow.location.replace(gmailLink.href);
+      window.location.assign(whatsappLink.href);
+    }
   });
 
   quoteForm.addEventListener("reset", () => {

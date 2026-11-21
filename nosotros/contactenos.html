@@ -83,7 +83,7 @@
     <div class="property-detail">
       <section class="form-card" aria-labelledby="contact-title">
         <h1 id="contact-title">Contáctenos</h1>
-        <p class="demo-notice"><strong>Envío manual:</strong> complete el formulario para preparar su mensaje. Debe confirmar el envío en WhatsApp y en su aplicación de correo; el sitio no envía automáticamente.</p>
+        <p class="demo-notice"><strong>Envío manual:</strong> al continuar se intentará abrir Gmail en otra pestaña y WhatsApp en esta pestaña, con su mensaje preparado. Debe pulsar Enviar en cada servicio; el sitio no envía automáticamente.</p>
         <p class="help-text">* Indica campo requerido. Consulte nuestro <a href="aviso-de-privacidad.html">aviso de privacidad</a> antes de compartir sus datos.</p>
         <form id="contact-form">
           <div class="form-grid">
@@ -100,17 +100,18 @@
               <p class="help-text" id="math-help">Resuelva la suma y escriba el resultado. Por ejemplo, para 1 + 3 escriba 4.</p>
             </div>
           </div>
-          <button class="form-submit" type="submit">Preparar mensaje para enviar</button>
+          <button class="form-submit" type="submit">Continuar a WhatsApp y Gmail</button>
+          <p class="help-text">Al continuar, sus datos se compartirán con WhatsApp y Gmail para preparar los mensajes. Necesita iniciar sesión en Gmail.</p>
           <p class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
           <div class="quote-delivery" id="quote-delivery" hidden>
             <div class="quote-delivery-actions">
-              <a class="button button-primary" id="quote-whatsapp" target="_blank" rel="noopener noreferrer">Abrir WhatsApp (nueva pestaña)</a>
-              <a class="button button-primary" id="quote-email">Abrir correo con copia a mi email</a>
+              <a id="quote-whatsapp" target="_blank" rel="noopener noreferrer" hidden>Abrir WhatsApp (nueva pestaña)</a>
+              <a id="quote-gmail" target="_blank" rel="noopener noreferrer" hidden>Abrir Gmail (nueva pestaña)</a>
             </div>
-            <p>Abra cada opción y pulse Enviar en su aplicación. El correo se prepara para lonjadepropiedad@gmail.com con copia a la dirección diligenciada; WhatsApp se prepara para el 319 219 26 84.</p>
+            <p>Si alguna pestaña no se abrió, use los enlaces anteriores. Revise y envíe cada mensaje en WhatsApp y Gmail. El correo se prepara para lonja@lonjadepropiedadraiz.com y lonjadepropiedad@gmail.com con copia a la dirección diligenciada; WhatsApp se prepara para el 319 219 26 84.</p>
             <label for="quote-preview">Mensaje completo para copiar</label>
             <textarea id="quote-preview" rows="10" readonly></textarea>
-            <p>Si alguna aplicación no se abre o el mensaje queda incompleto, copie este texto. Para el enlace de correo necesita una aplicación configurada; también puede pegarlo en su correo web y agregar su dirección en CC.</p>
+            <p>Si alguna ventana no se abre o el mensaje queda incompleto, copie este texto. También puede pegar el mensaje en su correo y enviarlo a ambas direcciones, agregando su dirección en CC.</p>
           </div>
         </form>
       </section>
